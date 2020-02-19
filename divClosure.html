@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Click me!</title>
+        <style>
+            body, button { margin: 10px;}
+            div { padding: 10px;}
+        </style>
+        <script>
+ // Click me! without a closure
+        /*  var count = 0;
+
+            window.onload = function() {
+                var button = document.getElementById("clickme");
+                button.onclick = handleClick;
+            };
+
+            function handleClick() {
+                var message = "You clicked me ";
+                var div = document.getElementById("message");
+                count++;
+                div.innerHTML = message + count + " times!";
+            }
+        */ 
+
+ // Click me! with a closure
+            window.onload = function() {
+                var count = 0;
+                var message = "You clicked me ";
+                var div = document.getElementById("message");
+
+                var button = document.getElementById("clickme");
+                button.onclick = function() {
+                    count++;
+                    div.innerHTML = message + count + "times!";
+                };
+            };
+ 
+ 
+ //Test drive my magic counter to confirm closure//     
+            function makeCounter() {
+                var count = 0;
+                function counter() {
+                    count = count + 1;
+                    return count;
+                }
+                return counter;
+            }
+
+            var doCount = makeCounter();
+            console.log(doCount()); // Answer = 1
+            console.log(doCount()); // Answer = 2
+            console.log(doCount()); // Answer = 3
+            console.log(doCount()); // Answer = 4
+
+//Let's take another example//
+            function makeAdder(x) { 
+                return function(y) {
+                    return x + y;
+                };
+            }
+
+            var add5 = makeAdder(5);
+            var add10 = makeAdder(10);
+
+            console.log(add5(2)); // Answer = 7
+            console.log(add10(2)); // Answer = 12
+        </script>
+    </head>
+    <body>
+        <button id="clickme">Click me!</button>
+        <div id="message"></div>
+    </body>
+</html>
